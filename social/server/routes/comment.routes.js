@@ -1,16 +1,16 @@
 import express from "express";
-import { createComment, getCommentsByPost, deleteComment } from "../controllers/comment.controllers.js";
+import { addComment, fetchComments, removeComment } from "../controllers/comment.controllers.js";
 import authMiddleware from "../middleware/auth.js";
 
-const router = express.Router();
+const commentRouter = express.Router();
 
-// Post a comment
-router.post("/:postId", authMiddleware, createComment);
+// Add a new comment to a post
+commentRouter.post("/:postId", authMiddleware, addComment);
 
-// Get all comments for a post
-router.get("/:postId", getCommentsByPost);
+// Retrieve all comments for a specific post
+commentRouter.get("/:postId", fetchComments);
 
-// Delete a comment
-router.delete("/:commentId", authMiddleware, deleteComment);
+// Delete a comment by its ID
+commentRouter.delete("/:commentId", authMiddleware, removeComment);
 
-export default router;
+export default commentRouter;
